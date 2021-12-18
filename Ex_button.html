@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        u {
+            color: blue;
+        }
+    </style>
+</head>
+
+<body>
+
+</html>
+<h1>웹을 만드는 언어들</h1>
+<ul>
+    <li>HTML</li>
+    <li>CSS</li>
+    <li>JavaScript</li>
+</ul>
+
+<p>
+    JavaScript는 웹 페이지를 동적인 페이지로 만들기 위해 고안된 언어입니다. <br>
+</p>
+
+<h1><u>배경색 바꾸기</u></h1>
+
+<button onclick="yellow()">노란색</button>
+<button onclick="back()">돌아가기</button>
+
+    <!--Javascript로 버튼에 기능 추가-->
+    <!--script 태그 : Javascript를 쓰겠다고 선언-->
+    <script>
+        function yellow() {
+            // document : 현재 html 문서
+            // querySelector : 현재 html 문서의 클래스, 태그 등을 가지고 오기 위해서 사용
+            // sytle : css
+            // color : 글자색
+            // = : 대입
+            document.querySelector('body').style.color = "blue";
+            document.querySelector('body').style.background = "yellow";
+            
+        }
+        function back(){
+            document.querySelector('body').style.color = "black";
+            document.querySelector('body').style.background = "white";
+            
+        }
+    </script>
+
+</body>
