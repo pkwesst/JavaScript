@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="Ex09_실행위치(외부).js"></script>
+    <!-- 외부 방식
+        : 일반적인 형태
+        : 코드가 공개되지 않는다.
+        : 관리하기 편하다. 
+        : 코드의 재사용이 좋아서 유지보수가 편하다. -->
+    <title>Document</title>
+
+</head>
+<body>
+    <h1> 홍길동 </h1>
+    <!-- 2. Body의 끝 태태그 위에 작성
+            - 주로 추천하는 스크립트 위치 -->
+    <script>
+        document.querySelector('h1').style.color = 'blue';
+    </script>
+    <!-- 1. head 내에 작성
+            - 문서를 초기화하거나 설정하는 가벼운 스크립트를 작성
+            - 무거운 스크립트가 있을 경우에는 랜더링에 바해가 돼서 로딩화면이 오래걸린다
+            - 랜더링 : html문서가 브라우저에 보여지는 과정 -->
+</body>
+</html>
