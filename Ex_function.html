@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!--alert_name() 함수 호출-->
+    <button onclick="alert_name()">클릭!</button>  
+    <script>
+      
+        // 1. 함수 선언
+        function 함수명(매개변수){
+            기능 & 로직
+            return 리턴값
+        }
+
+        // 더하기 함수(매개변수O, return값O)
+        function add(a,b){
+            var result = a+b
+            return result
+        }
+
+        // 알림창에 문자 띄우기(매개변수X, return값X)
+        function alert_name(){
+            alert('name')
+        }
+
+        // 함수 호출
+        console.log(add(1,2))
+
+    </script>
+</body>
+</html>
