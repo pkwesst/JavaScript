@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!--alert_name() 함수 호출-->
+    <button onclick="alert_name()">클릭!</button>  
+    <script>
+    
+        // 1. 함수 표현 : 익명함수(함수명이 없는 함수)를 선언하고, 변수에 참조
+        var plus = function (a,b){
+                        return a+b
+                    }
+
+        // 2. 익명 함수 호출
+        console.log(plus(1,4));
+        
+        // 3. 함수 특징
+        // 3-1. 매개변수의 데이터 타입을 검사하지 않는다.(오류X)
+        console.log((add(1,'2')));
+
+        // 3-2. 매개변수와 입력 값의 개수가 같은지 확인하지 않는다.
+        console.log("매개변수의 개수 : "+ add(1,2,3));
+        console.log("매개변수의 개수를 적게 : "+ add(1)); // 연산 불가능
+
+    </script>
+</body>
+</html>
+
