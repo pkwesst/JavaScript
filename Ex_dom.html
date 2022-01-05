@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>클릭 해 봅시다.</h1>
+    <button id="h1">h1 태그 생성</button>
+    <button id="a">a 태그 생성</button>
+    <button id="ul">ul 태그 생성</button>
+
+    <div id = "box"></div>
+
+    <script>
+        var h1 = document.getElementById('h1'); // id가 h1인 객체를 변수 h1에 저장
+        
+        h1.addEventListener('click', function(){    //click했을 때 function()이 실행되게 함
+            var box = document.getElementById('box');   // id가 box인 컨텐츠 내용을 변수 box에 저장
+            box.innerHTML = "<h1> DOM 활용하기 </h1>";  // id가 box인 태그 안에 "값"대입
+        });
+
+        var a = document.getElementById('a');
+
+        a.addEventListener('click', function(){
+            var box = document.getElementById('box');
+            box.innerHTML = '<h2><a href="http://www.google.com"> Google로 가보자! </a></h2>';
+        });
+
+        var ul = document.getElementById('ul');
+
+        ul.addEventListener('click', function(){
+        var box = document.getElementById('box');
+        box.innerHTML = "<ul><li>HTML</li><li>CSS</li><li>JS</li></ul>"
+
+        })
+
+    </script>
+</body>
+</html>
