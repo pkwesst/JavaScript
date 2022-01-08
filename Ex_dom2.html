@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p id="num">0</p>
+    <button id="plus">+1 증가</button>
+    <button id="minus">-1 감소</button>
+
+    <script>
+    
+        var num = document.getElementById('num');   //id가 num인 값 가져옴
+        var plus = document.getElementById('plus');   //id가 num인 값 가져옴
+        var minus = document.getElementById('minus');   //id가 num인 값 가져옴
+
+        plus.addEventListener('click', function(){
+            var cnt = num.innerHTML;
+            cnt++;
+            num.innerHTML = cnt;
+        })
+
+        minus.addEventListener('click', function(){
+            var cnt = num.innerHTML;
+            if( cnt > 0 ){
+                cnt--;
+            }
+            num.innerHTML=cnt;
+        })
+
+    </script>
+
+</body>
+</html>
