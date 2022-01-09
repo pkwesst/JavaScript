@@ -1,0 +1,120 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+	/* 전체 공간에 지도를 담기 위한 css */
+	html, body, #map{
+		width: 100%;
+		height: 100%;
+	}
+</style>
+
+<!-- jQuery import하기 -->
+<script src="jquery-3.6.0.min.js"></script>
+
+<!-- 지도 API 불러오기 -->
+<script type="text/javascript" 
+src="//dapi.kakao.com/v2/maps/sdk.js?appkey=89ff6950b18d9f65788625a6c1edae9f&libraries=services,clusterer,drawing"></script>
+
+</head>
+<body>
+	<!-- 지도 담을 영역 만들기 -->
+	<div id="map"></div>
+	
+	<script type="text/javascript">
+		// ajax로 음식점 이름, 주소, 전화번호 받아오기
+		$.ajax({
+			url : 'Foodshop_info', // 요청할 url => Foodshop_info.java에 데이터 요청 => Foodshop_info.java에서 DB에 접근해 데이터 가져옴 
+			type : 'post', // 전송방식
+			dataType : 'json', // 받아올 데이터 타입
+			success : function(foodshop_info) { // data : 성공해서 받아온 데이터(json)
+				alert('성공');
+				console.log(foodshop_info);
+				makeMap(foodshop_info); // 성공할때만 지도를 만들어 주는 함수  => makeMap() 함수 호출  => 매개변수 : data
+			},
+			error : function() {
+				alert('실패');
+			}
+		});
+		
+		function makeMap(foodshop_info){
+	         // 지도를 담을 영역 객체 조회
+	         var container = document.getElementById('map');
+	         
+	         //지도를 생성할 때 필요한 기본 옵션
+	         var options = {
+	            center : new kakao.maps.LatLng(35.110458, 126.877987), //지도의 중심좌표(위도, 경도)
+	            level : 4
+	         //지도의 레벨(확대, 축소 정도) : 숫자가 낮을 수록 더 확대
+	         }; 
+	      
+	         // 지도 생성 해서 map 변수에 담기
+	         var map = new kakao.maps.Map(container, options);
+	      
+	         // 주소-좌표를 변환하는 객체를 생성해서 geocoder 변수에 담기
+	         var geocoder = new kakao.maps.services.Geocoder();
+	         
+	         for (var i = 0; i < foodshop_info.length; i ++) {
+	            // 주소로 좌표를 검색하여 map에 마크로 나타낸다
+	            geocoder.addressSearch(foodshop_info[i].address, info(foodshop_info[i].name, foodshop_info[i].tell));        
+	         }	//(주소값,함수)
+	         
+	         // info함수
+	         function info(name, tell){//좌표 검색과, 해당 좌표에 대한 데이터를 출력하기 위한 클로저 함수
+	            return function(result, status) {
+	            
+	                // 정상적으로 검색이 완료됐으면 
+	                 if (status === kakao.maps.services.Status.OK) {
+	            
+	                    var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+	            
+	                    // 결과값으로 받은 위치를 마커로 표시합니다
+	                    var marker = new kakao.maps.Marker({
+	                        map: map,
+	                        position: coords
+	                    });
+	            
+	                    // 인포윈도우로 장소에 대한 설명을 표시합니다
+	                    var infowindow = new kakao.maps.InfoWindow({
+	                        content: '업소명 :<div style="width:150px;text-align:left;padding:0px 0;">'+name+'</div><br>'+
+	                        '전화번호 :<div style="width:150px;text-align:left;padding:0px 0;">'+tell+'</div>'
+	                    });
+	                    
+	                  // mouse를 올리면 infoWindow 보이기
+	                  kakao.maps.event.addListener(marker,'mouseover', function() {
+	                           infowindow.open(map, marker);
+	                        });
+	   
+	                  // mouse를 이동하면 infoWindow 지우기
+	                  kakao.maps.event.addListener(marker,'mouseout', function() {
+	                           infowindow.close();
+	                        });
+	                    
+	                    // 마커에 클릭이벤트를 등록합니다
+	                    kakao.maps.event.addListener(marker, 'click', function() {
+	                       //클릭한 해당 마크의 name과 tell을 쿼리스트링으로 get 방식으로 넘겨줌 
+	                       location.href = "foodshop_info.jsp?name=" +name+"&&tell="+tell;
+	                    });
+	         
+	                } 
+	                
+	            }
+	         }
+	      };
+
+	
+	var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
+	var options = { //지도를 생성할 때 필요한 기본 옵션
+		center: new kakao.maps.LatLng(35.110458, 126.877987), //지도의 중심좌표(위도, 경도)
+		level: 3 //지도의 레벨(확대, 축소 정도)
+	};
+
+	var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
+	</script>
+	
+</body>
+</html>
