@@ -1,0 +1,70 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+		<!-- 버튼 클릭하면 dataLoad() 함수 실행 -->
+		<button onclick="dataLoad()">데이터 가져오기</button> 
+		
+		<table border="1">
+			<thead>
+				<tr>
+					<td>이메일</td>
+					<td>전화번호</td>
+					<td>주소</td>
+				</tr>
+			</thead>
+			
+			<tbody id="tbody">
+			</tbody>
+			
+		</table>
+
+	<script type="text/javascript" src="js/jquery-3.6.0.min.js"></script> <script
+		type="text/javascript">
+		function dataLoad() { //dataLoad() 메소드 정의
+
+			$.ajax({ //ajax 이용
+				url : "ex02Gson", // url 맵핑 : servlet으로 요청
+				type : "get", //get 방식
+				//data : {}, // 받아 올 데이터 없음
+				dataType : 'json', //JSON 데이터 가져올 떄, JSON으로 꼭 지정해야함 <-기본 String 타입
+				success : function(res) { // 응답 받은 데이터 -> success 메소드 매개변수(res)로 들어감
+					console.log(res) //console창에 res 출력
+					
+					$('#tbody').html(''); //테이블 내용을 초기화 => 버튼 누를 때마다 내용 반복 추가 되는 것 방지
+					
+					for(let i = 0; i < res.length; i++){ //index 0부터 시작 반복
+						// data 중 0번쨰만 가져옴	
+						// 태그 만들기
+						let table = ''; //빈 문자열 가진 변수 생성
+						table += '<tr>'; //tr : 행 추가
+						table += '<td>' + res[i].email + '</td>'; //td : 열 추가 
+						table += '<td>' + res[i].tel + '</td>';
+						table += '<td>' + res[i].address + '</td>';
+						table += '</tr>';
+						
+						// Javascript코드로 html 태그 제작 4가지
+						// .html()
+						// .after()
+						// .before()
+						// .append() : 선택한 태그 내에 추가
+						$('#tbody').append(table); //id가 tbody인 태그의 뒤에 추가 => 변수명 table
+					}
+					
+				},
+				error : function() { //에러 : 익명 함수 실행
+					alert("요청 실패!"); //알림창에 출력
+				}
+			});
+
+		}
+	</script>
+	
+</body>
+</html>
